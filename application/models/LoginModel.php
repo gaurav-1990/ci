@@ -9,7 +9,8 @@
 			
 			if($q->num_rows())
 			{
-				return TRUE;
+				return $q->row()->id;
+				//return TRUE;
 			}
 			else
 			{

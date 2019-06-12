@@ -21,10 +21,16 @@ Class Login extends MY_Controller
 			$password = $this->input->post('pwd');
 
 			$this->load->model('loginmodel');
-			if($this->loginmodel->login_valid($username,$password))
+			
+			$login_id=$this->loginmodel->login_valid($username,$password);
+			
+			if($login_id)
 			{
+				$this->load->library('session');
+				$this->session->set_userdata('user_id', $login_id);
+				return redirect('admin/dashboard');
+
 				//credentials valid. login user
-				echo "Success";
 			}
 			else
 			{
@@ -36,6 +42,12 @@ Class Login extends MY_Controller
 		{
 			$this->load->view('public/admin_login');
 		}
+	}
+
+	public function logout()
+	{
+		$this->session->unset_userdata('user_id');
+		return redirect('login');
 	}
 }
 ?>
