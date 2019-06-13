@@ -1,11 +1,26 @@
 <?php
 	include_once('admin_header.php');
 ?>
-
+<br>
 <div class="container">
+	<div class="col-lg-6 col-lg-offset-6">
+			<?= anchor('admin/add_article','ADD ARTICLE',['class'=>'btn btn-info pull-right'])?>
+			<!-- <a href="<?= base_url('admin/add_article')?>" class="btn btn-info pull-right">ADD ARTICLE</a> -->
+		</div><br>
+
+		<?php if($feedback = $this->session->flashdata('feedback')) { 
+				$feedback_class = $this->session->flashdata('feedback_class');
+		?>
+		  		<div class="row">
+			  		<div class="alert alert-dismissible <?= $feedback_class ?>">
+						  <?= $feedback ?>
+					</div>
+				</div>
+				<?php } ?>
+
 	<table class="table">
 		<thead>
-			<th>Sr. No.</th>
+			<th>User ID</th>
 			<th>Title</th>
 			<th>Action</th>
 		</thead>
@@ -22,8 +37,9 @@
 				<td>1</td>
 				<td><?= $art->title ?></td>
 				<td>
-					<button class="btn btn-primary">EDIT</button>
-					<button class="btn btn-danger">DELETE</button>
+					
+					<a href='<?=base_url("admin/edit_article/{$art->id}")?>' class="btn btn-primary">EDIT</a>
+					<a href="" class="btn btn-danger">DELETE</a>
 				</td>
 			</tr>
 

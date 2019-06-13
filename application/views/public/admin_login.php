@@ -3,7 +3,18 @@
 ?>
 	<?php  echo form_open('login/admin_login') ?>
 	  	<div class="conṭainer">
+
+	  		
+
 		  		<legend>Admin Login</legend><br>
+		  		<?php if($error = $this->session->flashdata('login_failed')) { ?>
+		  		<div class="row">
+			  		<div class="alert alert-dismissible alert-danger">
+						  <?= $error?>
+					</div>
+				</div>
+				<?php } ?>
+
 			    <div class="form-group col-md-3">
 			      <label>USERNAME</label>
 			      <?php echo form_input(['class'=>'form-control','name'=>'un','placeholder'=>'USERNAME','value'=>set_value('un')]);?>
